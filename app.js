@@ -1,3 +1,4 @@
+const carousel = document.querySelector(".c-carousel");
 const nextButton = document.querySelector(".c-carousel-control-next");
 const prevButton = document.querySelector(".c-carousel-control-prev");
 const carouselItems = document.querySelectorAll(".c-carousel-item");
@@ -8,6 +9,7 @@ var itemCount = carouselItems.length;
 var indicatorUlWidth = indicatorUl.offsetWidth;
 var tempUrl = "0";
 var imgCounter = 0;
+var timeInterval = 0;
 var imgUrls = ["0"];
 carouselImages.forEach((item, i) => {
   imgUrls[i] = item.src;
@@ -23,6 +25,44 @@ indicatorLi.forEach((item, i) => {
     addActiveStatus(i);
   })
 });
+if(carousel.hasAttribute('data-interval'))
+{
+  timeInterval = carousel.getAttribute('data-interval');
+  // setTimeout(function(){
+  //   var itemIndex = 0;
+  //   carouselItems.forEach((item, i) => {
+  //     if(item.classList.contains("active"))
+  //     {
+  //       itemIndex = i;
+  //     }
+  //   });
+  //   removeActiveStatus();
+  //   itemIndex++;
+  //   if(itemIndex >= itemCount)
+  //   {
+  //     itemIndex = 0;
+  //   }
+  //   addActiveStatus(itemIndex);
+  // },timeInterval);
+  function autoNext(){
+    var itemIndex = 0;
+    carouselItems.forEach((item, i) => {
+      if(item.classList.contains("active"))
+      {
+        itemIndex = i;
+      }
+    });
+    removeActiveStatus();
+    itemIndex++;
+    if(itemIndex >= itemCount)
+    {
+      itemIndex = 0;
+    }
+    addActiveStatus(itemIndex);
+    setTimeout(autoNext,5000);
+  }
+  setTimeout(autoNext,5000);
+}
 nextButton.addEventListener('click',() =>{
   var itemIndex = 0;
   carouselItems.forEach((item, i) => {

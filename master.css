@@ -81,10 +81,10 @@
   background-size: cover;
   background-position: center;
   z-index:3;
-  opacity:0.8;
   cursor:pointer;
+  transition:all 0.3s ease-in-out;
 }
 .c-carousel-indicator-li.active{
-  opacity:1;
+  transform:scale(1.1);
   border:2px solid #aaaaaa;
 }
