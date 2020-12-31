@@ -36,7 +36,15 @@ if(carousel.hasAttribute('data-interval')){
   timeInterval = carousel.getAttribute('data-interval');
   autoTimer = setInterval(autoNext,timeInterval);
 }
-var indicatorWidth = indicatorUlWidth/(itemCount+1);
+var indicatorWidth = indicatorUlWidth/(itemCount+1.5);
+window.addEventListener('resize',()=>{
+  indicatorUlWidth = indicatorUl.offsetWidth;
+  indicatorWidth = indicatorUlWidth/(itemCount+1.5);
+  indicatorLi.forEach((item, i) => {
+    item.style.width = indicatorWidth+"px";
+    item.style.height = (indicatorWidth/1.777)+"px";
+  });
+});
 indicatorLi.forEach((item, i) => {
   item.style.width = indicatorWidth+"px";
   item.style.height = (indicatorWidth/1.777)+"px";
